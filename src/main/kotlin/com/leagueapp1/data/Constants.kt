@@ -2,7 +2,7 @@ package com.leagueapp1.data
 
 object Constants {
 
-    const val API_KEY = "RGAPI-d8b3d758-9c2c-467b-aa9b-15438ff75de5"
+    const val API_KEY = "RGAPI-9bf690eb-2ad2-4cf2-b8e2-b44dbf14bff"
     const val API_PART = "?api_key=$API_KEY"
     const val URL = "https://na1.api.riotgames.com/"
     const val ALL_CHAMPION_MASTERIES = "lol/champion-mastery/v4/champion-masteries/by-summoner/"

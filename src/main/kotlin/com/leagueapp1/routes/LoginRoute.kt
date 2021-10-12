@@ -1,6 +1,8 @@
 package com.leagueapp1.routes
 
 import com.leagueapp1.data.checkPasswordForEmail
+import com.leagueapp1.data.getSummonerFromDatabase
+import com.leagueapp1.data.getUser
 import com.leagueapp1.data.requests.AccountRequest
 import com.leagueapp1.data.responses.SimpleResponse
 import io.ktor.application.*
@@ -21,9 +23,10 @@ fun Route.loginRoute() {
             }
             val isPasswordCorrect = checkPasswordForEmail(request.email, request.password)
             if (isPasswordCorrect) {
-                call.respond(HttpStatusCode.OK, SimpleResponse(true, "You are now logged in!"))
+                val user = getUser(request.email)!!
+                call.respond(HttpStatusCode.OK, SimpleResponse(true, "You are now logged in!", user.puuid))
             } else {
-                call.respond(HttpStatusCode.OK, SimpleResponse(false, "The E-mail or password is incorrect"))
+                call.respond(HttpStatusCode.OK, SimpleResponse(false, "The E-mail or password is incorrect", null))
             }
         }
     }

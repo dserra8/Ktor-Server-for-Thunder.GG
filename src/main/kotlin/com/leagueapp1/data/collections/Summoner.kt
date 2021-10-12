@@ -13,7 +13,7 @@ data class Summoner(
     val profileIconId: Int,
     val revisionDate: Long,
     val summonerLevel: Long,
-    val rank: Rank? = null,
+    var rank: Rank? = null,
     val championList: List<Champion>? = null,
 )
 

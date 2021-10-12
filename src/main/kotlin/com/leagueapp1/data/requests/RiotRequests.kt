@@ -20,7 +20,7 @@ suspend fun updateSummoner(client: HttpClient, summonerFromApp: Summoner): Summo
     val summonerFromRiot = getSummoner(client, summonerFromApp.name)
     val championListFromRiot = getChampions(client, summonerFromApp.id)
     val rankFromRiot = getSummonerRank(client, summonerFromApp.id)?.find { it.queueType == "RANKED_SOLO_5x5" }
-   // val summonerFromMongo = getSummonerFromDatabase(summonerFromApp.id)
+    val summonerFromMongo = getSummonerFromDatabase(summonerFromApp.id)
     val championListFromApp = summonerFromApp.championList
 
     //First sync summoner from mongo and app
@@ -41,7 +41,7 @@ suspend fun updateSummoner(client: HttpClient, summonerFromApp: Summoner): Summo
     if (championListFromRiot != null && rankFromRiot != null && summonerFromRiot != null) {
         return summonerFromRiot.copy(rank = rankFromRiot, championList = championListFromRiot)
     }
-    return summonerFromApp
+    return summonerFromApp.apply { rank = summonerFromMongo?.rank ?: rank }
 }
 
 
